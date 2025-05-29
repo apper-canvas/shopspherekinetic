@@ -59,6 +59,9 @@
   .neu-button {
     @apply bg-surface-100 dark:bg-surface-800 shadow-neu-light dark:shadow-neu-dark border-0 transition-all duration-200 active:shadow-inner;
   }
+.wishlist-item {
+    @apply bg-white dark:bg-surface-800 rounded-xl p-4 border border-surface-100 dark:border-surface-700 shadow-card transition-all duration-200 hover:shadow-product;
+  }
 }
 
 @layer utilities {

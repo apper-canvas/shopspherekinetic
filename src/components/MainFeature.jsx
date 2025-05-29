@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'react-toastify'
 import ApperIcon from './ApperIcon'
+import { useWishlist } from '../providers/WishlistProvider'
 
 const MainFeature = ({ cartCount, setCartCount }) => {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -156,6 +157,16 @@ const MainFeature = ({ cartCount, setCartCount }) => {
   }
 
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0)
+// Wishlist functionality
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
+
+  const toggleWishlist = (product) => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id)
+    } else {
+      addToWishlist(product)
+    }
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -294,6 +305,21 @@ const MainFeature = ({ cartCount, setCartCount }) => {
                     src={product.image}
                     alt={product.name}
                     className="w-full h-48 sm:h-56 object-cover transition-transform duration-300 group-hover:scale-110"
+<div className="absolute top-3 left-3">
+                    <motion.button
+                      onClick={() => toggleWishlist(product)}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full bg-white/90 dark:bg-surface-800/90 backdrop-blur-sm shadow-soft hover:bg-white dark:hover:bg-surface-800 transition-all duration-200"
+                    >
+                      <ApperIcon 
+                        name={isInWishlist(product.id) ? "Heart" : "Heart"} 
+                        className={`w-4 h-4 transition-colors duration-200 ${
+                          isInWishlist(product.id) ? 'text-red-500 fill-current' : 'text-surface-600 dark:text-surface-400'
+                        }`} 
+                      />
+                    </motion.button>
+                  </div>
                   />
                   <div className="absolute top-3 right-3">
                     <span className="badge bg-accent text-white">

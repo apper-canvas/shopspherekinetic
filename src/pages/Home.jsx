@@ -2,11 +2,16 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import MainFeature from '../components/MainFeature'
 import ApperIcon from '../components/ApperIcon'
+import Wishlist from '../components/Wishlist'
+import { useWishlist } from '../providers/WishlistProvider'
 
 const Home = () => {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+const [isWishlistOpen, setIsWishlistOpen] = useState(false)
+  
+  const { wishlistCount } = useWishlist()
 
   useEffect(() => {
     const darkMode = localStorage.getItem('darkMode') === 'true'
@@ -104,6 +109,24 @@ const Home = () => {
                   </motion.span>
                 )}
               </motion.button>
+{/* Wishlist */}
+              <motion.button
+                onClick={() => setIsWishlistOpen(true)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="relative p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 transition-colors duration-200"
+              >
+                <ApperIcon name="Heart" className="w-5 h-5 text-surface-600 dark:text-surface-400" />
+                {wishlistCount > 0 && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold"
+                  >
+                    {wishlistCount}
+                  </motion.span>
+                )}
+              </motion.button>
 
               {/* Dark Mode Toggle */}
               <motion.button
@@ -160,6 +183,11 @@ const Home = () => {
       </motion.header>
 
       {/* Main Content */}
+{/* Wishlist Sidebar */}
+      <Wishlist 
+        isOpen={isWishlistOpen} 
+        onClose={() => setIsWishlistOpen(false)} 
+      />
       <main className="pt-16">
         <MainFeature cartCount={cartCount} setCartCount={setCartCount} />
       </main>
