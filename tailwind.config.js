@@ -22,8 +22,18 @@ primary: {
           light: '#a78bfa',
           dark: '#7c3aed'
         },
-        secondary: {
+secondary: {
           DEFAULT: '#06b6d4',
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0891b2',
+          700: '#0e7490',
+          800: '#155e75',
+          900: '#164e63',
           light: '#67e8f9',
           dark: '#0891b2'
         },
