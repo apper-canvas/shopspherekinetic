@@ -305,7 +305,8 @@ const MainFeature = ({ cartCount, setCartCount }) => {
                     src={product.image}
                     alt={product.name}
                     className="w-full h-48 sm:h-56 object-cover transition-transform duration-300 group-hover:scale-110"
-<div className="absolute top-3 left-3">
+/>
+                  <div className="absolute top-3 left-3">
                     <motion.button
                       onClick={() => toggleWishlist(product)}
                       whileHover={{ scale: 1.1 }}
@@ -320,7 +321,6 @@ const MainFeature = ({ cartCount, setCartCount }) => {
                       />
                     </motion.button>
                   </div>
-                  />
                   <div className="absolute top-3 right-3">
                     <span className="badge bg-accent text-white">
                       {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
