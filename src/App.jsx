@@ -33,6 +33,5 @@ function App() {
     </WishlistProvider>
   )
 }
-}
 
 export default App
